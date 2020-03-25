@@ -14,4 +14,7 @@ public class SpringCloudConfigServerApplication {
     public void sb1(){
         
     }
+    public void sb2(){
+
+    }
 }
