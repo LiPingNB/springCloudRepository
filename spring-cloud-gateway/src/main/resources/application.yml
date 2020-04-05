@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: time_route
+          uri: http://ityouknow.com
+          predicates:
+            - Host=**.foo.org
+              - Path=/headers
+              - Method=GET
+              - Header=X-Request-Id, \d+
+              - Query=foo, ba.
+              - Query=baz
+              - Cookie=chocolate, ch.p
+              - After=2020-04-02T23:23:23+08:00[Asia/Shanghai]
+          #通过请求 ip 地址进行匹配#- RemoteAddr=192.168.1.3/24
+           #通过请求参数名匹配# - Query=smile  - Query=keep, pu.
+           #通过请求路径匹配# - Path=/foo/{segment}
+           #通过请求方式匹配# - Method=GET
+           #通过 Host 匹配# - Host=**.ityouknow.com
+           #通过 Header 属性匹配# - Header=X-Request-Id, \d+
+            #通过 Cookie 匹配# - Cookie=ityouknow, kee.e
+            #通过时间匹配# - Between=2020-04-02T22:41:06+08:00[Asia/Shanghai], 2020-04-02T22:52:06+08:00[Asia/Shanghai]
+            ##- Before=2020-04-02T22:47:06+08:00[Asia/Shanghai]
+            ##- After=2020-04-02T22:41:06+08:00[Asia/Shanghai]
